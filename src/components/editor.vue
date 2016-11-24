@@ -1,10 +1,10 @@
 <template>
 <div class="editor">
 	<div class="orginEditor">
-		<textarea class="form-control" placeholder="请输入markdown语法"></textarea>
+		<textarea class="form-control" placeholder="请输入markdown语法">456</textarea>
 	</div>
 	<div class="mdShow">
-		<textarea readonly class="form-control" placeholder="转换为对应样式"></textarea>
+		<textarea readonly class="form-control" placeholder="转换为对应样式" value="123"></textarea>
 	</div>	
 </div>
 </template>
