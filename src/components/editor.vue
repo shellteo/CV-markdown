@@ -1,19 +1,56 @@
 <template>
 <div class="editor">
+	
 	<div class="orginEditor">
-		<textarea class="form-control" placeholder="请输入markdown语法">456</textarea>
+		<textarea class="form-control" placeholder="请输入markdown语法" :value='activeText()'
+		v-on:input='genMd' ref="input"></textarea>
 	</div>
-	<div class="mdShow">
-		<textarea readonly class="form-control" placeholder="转换为对应样式" value="123"></textarea>
-	</div>	
+	<div class="mdShow" v-html="mdContent">
+		
+	</div>
 </div>
 </template>
 <script>
+	import marked from 'marked'
+	import { mapMutations } from 'vuex'
 	export default{
-		name:"editor"
+		name:"editor",
+		data(){
+			return {
+				mdContent:'',
+			}
+		},
+		methods:{
+			...mapMutations([
+				'editNote',
+			]),
+			genMd:function(){
+				this.editNote(this.$refs.input.value);
+				this.mdContent = marked(this.activeText());
+			},
+			activeText(){
+				console.log(this.$store.state.activeNote.content);
+				if(this.$store.state.activeNote.content){
+					console.log("执行到if");
+					return this.$store.state.activeNote.content;
+				}else{
+					console.log("执行到else");
+					return '';
+				}
+			}
+		},
+		updated () {
+			this.genMd();
+		},
+		computed:{
+
+		}
 	}
 </script>
 <style scoped>
+	.blockquotes{
+		font-style: italic;
+	}
 	.editor{
 		margin-left: 250px;
 		width: auto;
@@ -21,14 +58,17 @@
 	}
 	.orginEditor{
 		height: 100%;
-		width: 50%;
+		width: 45%;
 		float: left;
 	}
 	.mdShow{
-		width: 50%;
+		width: 55%;
 		height: 100%;
+		padding: 10px;
 		float: left;
 		background-color: #F5F5F5;
+		word-wrap:break-word; 
+		overflow :auto
 	}
 	.orginEditor textarea{
 		width: 100%;
@@ -38,8 +78,8 @@
 		border-radius: 0;
 		resize: none;
 	}
-	.mdShow textarea{
-		resize: none;
+	.mdShow iframe{
+		
 		width: 100%;
 		background-color: #F5F5F5;
 		padding: 10px;

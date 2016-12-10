@@ -20,7 +20,7 @@ export default {
 }
 </script>
 <style>
-  @import url("//cdn.bootcss.com/bulma/0.2.3/css/bulma.min.css");
+  @import url("//cdn.bootcss.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css");
   @import url("//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css");
   html, #app {
   height: 100%;

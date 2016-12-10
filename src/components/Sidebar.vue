@@ -1,14 +1,30 @@
 <template>
 	<div class="sidebar">
-		<dropdown></dropdown>
+		<div class="dropdown">
+			<a href="javascript:void(0)" @click="addNote">
+				<i class="fa fa-plus fa-2x" ></i>
+			</a>
+			<a href="javascript:void(0)" @click="">
+				<i class="fa fa-eye fa-2x"></i>
+			</a>
+			<a href="javascript:void(0)" @click="">
+				<i class="fa fa-download fa-2x"></i>
+			</a>
+			<a href="javascript:void(0)" @click="deleteNote">
+				<i class="fa fa-trash fa-2x"></i>
+			</a>
+		</div>
 	</div>
 </template>
 <script>
-import Dropdown from './dropdown'
+import { mapMutations } from 'vuex'
 	export default{
 	  	name:'sidebar',
-	  	components:{
-	  		Dropdown
+	  	methods:{
+	  		...mapMutations([
+				'addNote',
+				'deleteNote'
+			]),
 	  	}
 	}
 </script>
@@ -20,5 +36,14 @@ import Dropdown from './dropdown'
 		background-color: #2a2a2a;
 		left: 0;
 		top: 0;
+	}
+	.dropdown a{
+		color:#ccc;
+		display: block;
+		padding:10px;
+		text-align: center;
+	}
+	.dropdown a:hover{
+		background-color: #8B8378;
 	}
 </style>
