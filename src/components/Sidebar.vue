@@ -26,6 +26,8 @@ import { mapMutations } from 'vuex'
 				'deleteNote'
 			]),
 	  		genPdf(){
+	  			alert("点击预览，再右键打印保存为pdf")
+	  			var pdf = new jsPDF('p', 'pt', 'letter');
 	  			 var pdf = new jsPDF();
 			        var options = {
 			             pagesplit: true
