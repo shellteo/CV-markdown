@@ -13,21 +13,22 @@
 	</div>
 </template>
 <script>
-	import { mapMutations } from 'vuex'
+	import { mapMutations ,mapGetters } from 'vuex'
 	export default{
 		name:"cvlist",
 		data(){
 			return {
 				items:this.$store.state.notes,
-				activeCV:{}
 			}
 		},
 		computed:{
-
+			...mapGetters([
+				'activeCV'
+			])
 		},
 		vuex:{
 			getters:{
-				//items:state=>state.notes,
+				
 			},
 			actions:{
 				
@@ -35,12 +36,17 @@
 		},
 		methods:{
 			...mapMutations([
-				'toggleActive'
+				'toggleActive',
+				'initActive'
 			]),
 			selected(item){
 				this.toggleActive(item);
 				this.activeCV = item;
 			}
+		},
+		created(){
+			console.log("123");
+			this.initActive();
 		}
 	}
 </script>

@@ -4,10 +4,10 @@
 			<a href="javascript:void(0)" @click="addNote">
 				<i class="fa fa-plus fa-2x" ></i>
 			</a>
-			<a href="javascript:void(0)" @click="">
+			<router-link to="/cv" @click="view">
 				<i class="fa fa-eye fa-2x"></i>
-			</a>
-			<a href="javascript:void(0)" @click="">
+			</router-link>
+			<a href="javascript:void(0)" @click="genPdf">
 				<i class="fa fa-download fa-2x"></i>
 			</a>
 			<a href="javascript:void(0)" @click="deleteNote">
@@ -25,6 +25,22 @@ import { mapMutations } from 'vuex'
 				'addNote',
 				'deleteNote'
 			]),
+	  		genPdf(){
+	  			 var pdf = new jsPDF();
+			        var options = {
+			             pagesplit: true
+			        };
+			        //$('.pdf-wrapper')
+			        var CV = document.querySelector(".mdShow");
+
+			        console.log(CV)
+			        // pdf.addHTML(CV,options,function() {
+			        //     pdf.save('CV.pdf');
+			        // });
+	  		},
+	  		view(){
+	  			console.log("123");
+	  		}
 	  	}
 	}
 </script>

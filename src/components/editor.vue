@@ -2,7 +2,7 @@
 <div class="editor">
 	
 	<div class="orginEditor">
-		<textarea class="form-control" placeholder="请输入markdown语法" :value='activeText()'
+		<textarea class="form-control" placeholder="请输入markdown语法" :value='activeText'
 		v-on:input='genMd' ref="input"></textarea>
 	</div>
 	<div class="mdShow" v-html="mdContent">
@@ -12,7 +12,7 @@
 </template>
 <script>
 	import marked from 'marked'
-	import { mapMutations } from 'vuex'
+	import { mapMutations ,mapGetters} from 'vuex'
 	export default{
 		name:"editor",
 		data(){
@@ -25,25 +25,22 @@
 				'editNote',
 			]),
 			genMd:function(){
-				this.editNote(this.$refs.input.value);
-				this.mdContent = marked(this.activeText());
-			},
-			activeText(){
-				console.log(this.$store.state.activeNote.content);
-				if(this.$store.state.activeNote.content){
-					console.log("执行到if");
-					return this.$store.state.activeNote.content;
-				}else{
-					console.log("执行到else");
-					return '';
+				if(this.$refs.input.value){
+					this.editNote(this.$refs.input.value);
 				}
-			}
+				this.mdContent = marked(this.activeText);
+			},
 		},
 		updated () {
 			this.genMd();
 		},
+		created(){
+			this.mdContent = marked(this.activeText);
+		},
 		computed:{
-
+			...mapGetters([
+				'activeText'
+			])
 		}
 	}
 </script>
